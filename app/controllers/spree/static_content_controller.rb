@@ -13,6 +13,9 @@ class Spree::StaticContentController < Spree::StoreController
       request.path
     end
 
+    # required for sidebar content
+    @taxonomies = Spree::Taxonomy.includes(root: :children)
+
     unless @page = Spree::Page.visible.by_slug(path).first
       render_404
     end
